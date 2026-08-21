@@ -6,8 +6,11 @@ import CommonButton from './components/CommonButton'
 import CommonErrorText from './components/CommonErrorText'
 import CommonHeader from './components/CommonHeader'
 import InputLine from './components/InputLine'
+import TabBar, { type TabRoute } from './components/TabBar'
 import './styles.css'
 import LoadingSpinner from './components/LoadingSpinner'
+import FavoritesScreen from './routes/FavoritesScreen'
+import HomeScreen from './routes/HomeScreen'
 
 function getFriendlyAuthError(error: { message?: string } | null) {
   if (!error?.message) return ''
@@ -142,14 +145,23 @@ function SignUpScreen({ onBack }: SignUpScreenProps) {
   )
 }
 
-function SignedInScreen() {
-  const { user } = useAuth()
+function MainTabsScreen() {
+  const [route, setRoute] = useState<TabRoute>(() => window.location.hash === '#/favorites' ? 'favorites' : 'home')
+
+  useEffect(() => {
+    function updateRoute() {
+      setRoute(window.location.hash === '#/favorites' ? 'favorites' : 'home')
+    }
+
+    window.addEventListener('hashchange', updateRoute)
+    return () => window.removeEventListener('hashchange', updateRoute)
+  }, [])
 
   return (
-    <main className="signed-in">
-      <p>Signed in as {user?.email}</p>
-      <CommonButton title="Sign out" onPress={() => void supabase.auth.signOut()} />
-    </main>
+    <div className="main-tabs-shell">
+      {route === 'favorites' ? <FavoritesScreen /> : <HomeScreen />}
+      <TabBar activeRoute={route} />
+    </div>
   )
 }
 
@@ -164,7 +176,7 @@ export default function App() {
       </main>
     );
   } 
-  if (isLoggedIn) return <SignedInScreen />
+  if (isLoggedIn) return <MainTabsScreen />
 
   return screen === 'signup'
     ? <SignUpScreen onBack={() => setScreen('login')} />
