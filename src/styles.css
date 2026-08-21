@@ -167,6 +167,96 @@ button, input, textarea {
     min-height: 100%;
 }
 
+.home-hero {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    min-height: 300px;
+    margin: 80px 30px 0;
+    overflow: hidden;
+    border-radius: 15px;
+    background: #4e4ac9;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: min(500px, calc(100% - 20px));
+    min-width: 280px;
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+}
+
+.hero-content h1,
+.hero-content p {
+    margin: 0;
+}
+
+.hero-content h1 {
+    font-size: 30px;
+    font-weight: 700;
+    
+}
+
+.hero-content p {
+    color: #14d470;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.hero-product {
+    position: absolute;
+    z-index: 1;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.hero-ribbon {
+    position: absolute;
+    z-index: 2;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.hero-teddy {
+    left: clamp(-7px, -5vw, -20px);
+    bottom: clamp(-160px, -6vw, -35px);
+    width: clamp(230px, 28vw, 350px);
+    height: auto;
+    transform: rotate(30deg);
+}
+
+.hero-laptop {
+    right: clamp(-20px, -8vw, -45px);
+    bottom: clamp(-120px, -8vw, -90px);
+    width: clamp(270px, 32vw, 400px);
+    height: auto;
+    transform: rotate(80deg);
+}
+
+.hero-ribbon-rimage {
+    right: clamp(-30px, -3vw, 170px);
+    bottom: clamp(-90px, -6vw, -55px);
+    width: clamp(210px, 24vw, 300px);
+    height: auto;
+    transform: rotate(190deg);
+}
+
+.hero-ribbon-limage {
+    left: clamp(-70px, -5vw, -30px);
+    top: clamp(-100px, -7vw, -45px);
+    width: clamp(210px, 24vw, 300px);
+    height: auto;
+    transform: rotate(10deg);
+}
+
 .search-bar-container {
     display: flex;
     align-items: center;
@@ -188,6 +278,16 @@ button, input, textarea {
     background: transparent;
     color: white;
     cursor: pointer;
+}
+
+.home-hero .search-bar-container {
+    height: auto;
+    margin-top: 30px;
+    background: transparent;
+}
+
+.home-hero .search-bar {
+    width: min(400px, 100%);
 }
 
 .search-bar img {
@@ -260,6 +360,7 @@ button, input, textarea {
 .like-button {
     width: 30px;
     height: 30px;
+    margin-left: auto;
     padding: 0;
     border: 0;
     background: transparent;
@@ -278,46 +379,97 @@ button, input, textarea {
 
 .tab-bar {
     position: fixed;
-    right: 0;
-    bottom: 0;
     left: 0;
+    top: 0;
+    right: 0;
+    flex-direction: row;
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 80px;
     background: white;
-    box-shadow: 0 15px 20px rgba(0, 0, 0, 0.2);
+    
 }
 
 .tab-button {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 70px;
+    width: 105px;
     height: 70px;
     color: #6f6f6f;
-    font-size: 12px;
+    font-size: 20px;
     text-decoration: none;
+}
+
+.tab-barleft{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-right: 50px;
+    gap: 15px;
 }
 
 .tab-button.active {
     color: #4e4ac9;
+    font-size: 20px;
 }
 
 .tab-button img {
-    width: 30px;
-    height: 30px;
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+
+.tab-barimage {
+    width: 270px;
+    height: 60px;
 }
 
 @media (max-width: 380px) {
+
+
+    .hero-ribbon-rimage {
+        right: 24px;
+        bottom: -56px;
+        width: 210px;
+    }
+
+    .hero-ribbon-limage {
+        left: -72px;
+        top: -64px;
+        width: 210px;
+    }
+
+
+    .hero-content {
+        width: min(100% - 32px, 360px);
+    }
+
+    .hero-content h1 {
+        font-size: 19px;
+    }
+
+    .hero-content p {
+        font-size: 17px;
+    }
+
     .listing-card {
         align-items: flex-start;
+        width: '100%';
     }
 
     .listing-image {
         width: 110px;
         height: 110px;
+    }
+}
+
+@media (max-width: 771px) {
+    .hero-product {
+        display: none;
     }
 }

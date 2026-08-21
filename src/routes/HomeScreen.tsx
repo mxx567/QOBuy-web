@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import ListingCard from '../components/ListingCard'
 import SearchBar from '../components/SearchBar'
 import LoadingSpinner from '../components/LoadingSpinner'
+import herolaptop from '../assets/hero/hero-laptop.png'
+import heroteddybear from '../assets/hero/hero-teddybear.png'
+import heroribbon from '../assets/hero/hero-ribbon.png'
 import { useFavorites } from '../hooks/useFavorites'
 import { supabase } from '../supabase'
 import type { Category, Listing } from '../types/listing'
@@ -38,7 +41,33 @@ export default function HomeScreen() {
 
   return (
     <main className="listings-page">
-      <SearchBar />
+      <section className="home-hero" aria-labelledby="home-hero-title">
+        <img
+          className="hero-ribbon hero-ribbon-rimage"
+          src={heroribbon}
+          alt=""
+        />
+        <img
+          className="hero-ribbon hero-ribbon-limage"
+          src={heroribbon}
+          alt=""
+        />
+        <img
+          className="hero-product hero-teddy"
+          src={heroteddybear}
+          alt=""
+        />
+        <img
+          className="hero-product hero-laptop"
+          src={herolaptop}
+          alt=""
+        />
+        <div className="hero-content">
+          <h1 id="home-hero-title">Find what you're looking for. Sell what you don't need.</h1>
+          <p>Thousands of listings in one place.</p>
+          <SearchBar />
+        </div>
+      </section>
       <section className="listings-content">
         {listings.map((listing) => (
           <ListingCard
