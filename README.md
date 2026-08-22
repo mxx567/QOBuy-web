@@ -25,7 +25,7 @@
 </ul>
 <pre><code>
   git clone https://github.com/mxx567/QOBuy-web
-  cd QOBuy
+  cd QOBuy-web
   npm install
   npm run dev //if you want to start a localhost
 </code></pre>
