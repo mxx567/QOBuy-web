@@ -1,5 +1,31 @@
+@font-face {
+    font-family: 'HelveticaNeue-Thin';
+    src: url('./assets/fonts/HelveticaNeue-Thin.otf') format('opentype');
+    font-weight: 100;
+}
+@font-face {
+    font-family: 'HelveticaNeue-Light';
+    src: url('./assets/fonts/HelveticaNeue-Light.otf') format('opentype');
+    font-weight: 300;
+}
+@font-face {
+    font-family: 'HelveticaNeue-Roman';
+    src: url('./assets/fonts/HelveticaNeue-Roman.otf') format('opentype');
+    font-weight: 400;
+}
+@font-face {
+    font-family: 'HelveticaNeue-Medium';
+    src: url('./assets/fonts/HelveticaNeue-Medium.otf') format('opentype');
+    font-weight: 500;
+}
+@font-face {
+    font-family: 'HelveticaNeue-Bold';
+    src: url('./assets/fonts/HelveticaNeue-Bold.otf') format('opentype');
+    font-weight: 700;
+}
+
 :root { 
-    font-family: Arial, sans-serif; 
+    font-family: 'HelveticaNeue-Roman', Arial, sans-serif; 
     color: black; 
     background: white; 
 }
@@ -32,7 +58,7 @@ button, input, textarea {
     margin: 0; 
     color: black; 
     font-size: 20px; 
-    font-weight: bold; 
+    font-family: 'HelveticaNeue-Bold'; 
 }
 .input-line { 
     width: min(340px, 100%); 
@@ -134,7 +160,7 @@ button, input, textarea {
     margin: 0;
     color: black;
     font-size: 20px;
-    font-weight: bold;
+    font-family: 'HelveticaNeue-Bold';
 }
 
 .loadingSpinner {
@@ -299,7 +325,7 @@ button, input, textarea {
     margin: 0;
     color: black;
     font-size: 48px;
-    font-weight: bold;
+    font-family: 'HelveticaNeue-Bold';
 }
 
 .favorites-page {
@@ -452,7 +478,7 @@ button, input, textarea {
     margin: 0;
     color: black;
     font-size: 20px;
-    font-weight: bold;
+    font-family: 'HelveticaNeue-Bold';
 }
 
 .listing-details h2 {
