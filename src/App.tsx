@@ -6,7 +6,9 @@ import { redirect, Route, Routes, useNavigate } from 'react-router-dom'
 import LoginScreen from './routes/LoginScreen'
 import ProtectedRoute from './routes/ProtectedRoute'
 import SignUpScreen from './routes/SignUpScreen'
-import { useAuth } from './auth'
+import { useAuthStore } from './store/authStore'
+import { useEffect } from 'react'
+import { supabase } from './supabase'
 
 function MainTabsScreen() {
   return (
@@ -17,7 +19,19 @@ function MainTabsScreen() {
 }
 
 export default function App() {
-  const { isLoggedIn } = useAuth()
+  const isLoggedIn = useAuthStore((i) => i.isLoggedIn)
+  const syncAuthState  = useAuthStore((s) => s.syncAuthState)
+
+  useEffect(()=>{
+    let active = true
+    void syncAuthState(active)
+    const { data: listener } = supabase.auth.onAuthStateChange(() => void syncAuthState(active))
+    return () => {
+      active = false
+      listener.subscription.unsubscribe()
+    }
+  }, [])
+  
   const nav = useNavigate();
   return(
     <div>

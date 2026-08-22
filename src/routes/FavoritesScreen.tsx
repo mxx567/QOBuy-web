@@ -4,10 +4,12 @@ import LoadingSpinner from '../components/LoadingSpinner'
 import { supabase } from '../supabase'
 import type { Category, Listing } from '../types/listing'
 import { useFavoritesData } from '../store/favouritesStore'
-import { useAuth } from '../auth'
+import { useAuthStore } from '../store/authStore'
 
 export default function FavoritesScreen() {
-  const { user, isLoading : isAuthLoading } = useAuth();
+  // const { user, isLoading : isAuthLoading } = useAuth();
+  const user = useAuthStore((s) => s.user);
+  const isAuthLoading = useAuthStore((s) => s.isLoading);
   const [listings, setListings] = useState<Listing[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [isListingsLoading, setIsListingsLoading] = useState(true)

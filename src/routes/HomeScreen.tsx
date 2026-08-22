@@ -12,14 +12,14 @@ import keywordIcon from '../../../QOBuy/src/assets/icons/titlename.png'
 import { useFavoritesData } from '../store/favouritesStore'
 import { supabase } from '../supabase'
 import type { Category, Listing, Region } from '../types/listing'
-import { useAuth } from '../auth'
+import { useAuthStore } from '../store/authStore'
 
 type PriceSort = 'newest' | 'cheapest' | 'expensive' | 'free'
 type Condition = 'used' | 'new' | ''
 
 export default function HomeScreen() {
-  const {user, isLoading: isAuthLoading} = useAuth();
-
+  // const {user, isLoading: isAuthLoading} = useAuth();
+  const user = useAuthStore((s) => s.user);
   const [listings, setListings] = useState<Listing[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [regions, setRegions] = useState<Region[]>([])

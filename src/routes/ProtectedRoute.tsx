@@ -1,9 +1,10 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth } from "../auth"; // Your custom auth hook
 import LoadingSpinner from "../components/LoadingSpinner";
+import { useAuthStore } from "../store/authStore";
 
 const ProtectedRoute = () => {
-  const { isLoggedIn, isLoading } = useAuth();
+  const isLoggedIn = useAuthStore((s) => s.isLoggedIn);
+  const isLoading = useAuthStore((s) => s.isLoading)
   const location = useLocation();
 
 
