@@ -1,4 +1,4 @@
-function getFriendlyAuthError(error: { message?: string } | null) {
+export default function getFriendlyAuthError(error: { message?: string } | null) {
   if (!error?.message) return ''
   const message = error.message.toLowerCase()
   if (message.includes('invalid login credentials')) return 'Email or password is incorrect. Please try again.'

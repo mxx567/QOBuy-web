@@ -4,7 +4,8 @@ import logo from "../assets/Logo.png"
 import CommonErrorText from "../components/CommonErrorText"
 import CommonButton from "../components/CommonButton"
 import InputLine from "../components/InputLine"
-
+import getFriendlyAuthError from "../utils/getFrendlyAuthError"
+import { useNavigate } from "react-router-dom"
 
 type LoginScreenProps = {
   onSignUp: () => void
@@ -14,6 +15,8 @@ export default function LoginScreen({ onSignUp }: LoginScreenProps) {
   const [iemail, setIEmail] = useState('')
   const [ipassword, setIPassword] = useState('')
   const [message, setMessage] = useState('')
+  const nav = useNavigate();
+
 
   async function signInWithEmail() {
     const { error } = await supabase.auth.signInWithPassword({
@@ -21,7 +24,11 @@ export default function LoginScreen({ onSignUp }: LoginScreenProps) {
       password: ipassword,
     })
 
-    if (error) setMessage(getFriendlyAuthError(error))
+    if (error){
+        setMessage(getFriendlyAuthError(error))
+        return;
+    } 
+    nav("/")
   }
 
   return (

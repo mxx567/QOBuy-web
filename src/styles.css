@@ -456,7 +456,6 @@ button, input, textarea {
 }
 
 .listing-details h2 {
-    max-width: 150px;
     overflow-wrap: anywhere;
 }
 
@@ -544,6 +543,20 @@ button, input, textarea {
     text-decoration: none;
 }
 
+.signout-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 70px;
+    color: #6f6f6f;
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+    background: none;
+}
+
 .tab-barleft{
     width: 100%;
     display: flex;
@@ -559,6 +572,11 @@ button, input, textarea {
 }
 
 .tab-button img {
+    width: 16px;
+    height: 16px;
+    margin-right: 10px;
+}
+.signout-button img {
     width: 16px;
     height: 16px;
     margin-right: 10px;

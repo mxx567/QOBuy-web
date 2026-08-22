@@ -4,6 +4,7 @@ import CommonHeader from "../components/CommonHeader"
 import InputLine from "../components/InputLine"
 import CommonErrorText from "../components/CommonErrorText"
 import CommonButton from "../components/CommonButton"
+import { useNavigate } from "react-router-dom"
 
 type SignUpScreenProps = {
   onBack: () => void
@@ -15,6 +16,8 @@ export default function SignUpScreen({ onBack }: SignUpScreenProps) {
   const [ipassword, setIPassword] = useState('')
   const [icpassword, setIcPassword] = useState('')
   const [message, setMessage] = useState('')
+ 
+  const nav = useNavigate();
 
   async function signUp() {
     if (ipassword !== icpassword) {
@@ -43,7 +46,11 @@ export default function SignUpScreen({ onBack }: SignUpScreenProps) {
       if (profileError) setMessage(profileError.message)
     }
 
-    if (error) setMessage(error.message)
+    if (error) {
+        setMessage(error.message)
+        return;
+    }
+    nav("/")
   }
 
   return (
