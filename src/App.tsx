@@ -11,6 +11,7 @@ import './styles.css'
 import LoadingSpinner from './components/LoadingSpinner'
 import FavoritesScreen from './routes/FavoritesScreen'
 import HomeScreen from './routes/HomeScreen'
+import { Route, Routes } from 'react-router-dom'
 
 function getFriendlyAuthError(error: { message?: string } | null) {
   if (!error?.message) return ''
@@ -146,39 +147,37 @@ function SignUpScreen({ onBack }: SignUpScreenProps) {
 }
 
 function MainTabsScreen() {
-  const [route, setRoute] = useState<TabRoute>(() => window.location.hash === '#/favorites' ? 'favorites' : 'home')
-
-  useEffect(() => {
-    function updateRoute() {
-      setRoute(window.location.hash === '#/favorites' ? 'favorites' : 'home')
-    }
-
-    window.addEventListener('hashchange', updateRoute)
-    return () => window.removeEventListener('hashchange', updateRoute)
-  }, [])
-
   return (
     <div className="main-tabs-shell">
-      {route === 'favorites' ? <FavoritesScreen /> : <HomeScreen />}
-      <TabBar activeRoute={route} />
+      <TabBar activeRoute={'/'} />
     </div>
   )
 }
 
 export default function App() {
-  const { isLoading, isLoggedIn } = useAuth()
-  const [screen, setScreen] = useState<'login' | 'signup'>('login')
+  // const { isLoading, isLoggedIn } = useAuth()
+  // const [screen, setScreen] = useState<'login' | 'signup'>('login')
   
-  if (isLoading){
-    return (
-      <main className="loading">
-        <LoadingSpinner />
-      </main>
-    );
-  } 
-  if (isLoggedIn) return <MainTabsScreen />
+  // if (isLoading){
+  //   return (
+  //     <main className="loading">
+  //       <LoadingSpinner />
+  //     </main>
+  //   );
+  // } 
+  // if (isLoggedIn) return <MainTabsScreen />
 
-  return screen === 'signup'
-    ? <SignUpScreen onBack={() => setScreen('login')} />
-    : <LoginScreen onSignUp={() => setScreen('signup')} />
+  // return screen === 'signup'
+  //   ? <SignUpScreen onBack={() => setScreen('login')} />
+  //   : <LoginScreen onSignUp={() => setScreen('signup')} />
+  return(
+    <div>
+      <MainTabsScreen />
+      <Routes>
+        <Route  path="/" element={<HomeScreen />} />
+        <Route  path="/favourites" element={<FavoritesScreen />} />
+      </Routes>
+     
+    </div>
+  );
 }
