@@ -34,9 +34,12 @@ export default function ListingCard({ listing, category = 'Unknown', isLiked, on
             <span>{category}</span>
             <span>{date2string(listing.created_at)}</span>
           </div>
-          <button className="like-button" type="button" onClick={toggleLike} aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}>
-            <img src={liked ? favoriteFilledIcon : favoriteIcon} alt="" />
-          </button>
+          <div className="like-button-container">
+            <button className="like-button" type="button" onClick={toggleLike} aria-label={liked ? 'Remove from favorites' : 'Add to favorites'}>
+              <img src={liked ? favoriteFilledIcon : favoriteIcon} alt="" />
+            </button>
+          </div>
+
         </div>
       </div>
     </article>
