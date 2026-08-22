@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react'
 import ListingCard from '../components/ListingCard'
 import LoadingSpinner from '../components/LoadingSpinner'
-import { useFavorites } from '../hooks/useFavorites'
 import { supabase } from '../supabase'
 import type { Category, Listing } from '../types/listing'
+import { useFavoritesData } from '../store/favouritesStore'
+import { useAuth } from '../auth'
 
 export default function FavoritesScreen() {
+  const { user, isLoading : isAuthLoading } = useAuth();
   const [listings, setListings] = useState<Listing[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [isListingsLoading, setIsListingsLoading] = useState(true)
-  const { likedListingIds, isLoading: areFavoritesLoading, toggleFavorite } = useFavorites()
+  const { likedListingIds, isLoading: areFavoritesLoading, toggleFavorite, refreshFavorites } = useFavoritesData();
+
+  useEffect(() => {
+    if (!isAuthLoading) void refreshFavorites(user?.id)
+  }, [isAuthLoading, user?.id, refreshFavorites])
 
   useEffect(() => {
     let isActive = true
@@ -53,7 +59,7 @@ export default function FavoritesScreen() {
             listing={listing}
             category={categories.find((category) => category.id === listing.category)?.name}
             isLiked={likedListingIds.includes(listing.id)}
-            onLikePress={(nextIsLiked) => void toggleFavorite(listing.id, nextIsLiked)}
+            onLikePress={(nextIsLiked) => void toggleFavorite(user?.id, listing.id, nextIsLiked)}
           />
         ))}
         {!listings.length && <p className="empty-message">No favorite listings yet.</p>}

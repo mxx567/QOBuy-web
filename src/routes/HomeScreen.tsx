@@ -9,14 +9,17 @@ import categoryIcon from '../../../QOBuy/src/assets/icons/categories.png'
 import locationIcon from '../../../QOBuy/src/assets/icons/location.png'
 import priceIcon from '../../../QOBuy/src/assets/icons/price.png'
 import keywordIcon from '../../../QOBuy/src/assets/icons/titlename.png'
-import { useFavorites } from '../hooks/useFavorites'
+import { useFavoritesData } from '../store/favouritesStore'
 import { supabase } from '../supabase'
 import type { Category, Listing, Region } from '../types/listing'
+import { useAuth } from '../auth'
 
 type PriceSort = 'newest' | 'cheapest' | 'expensive' | 'free'
 type Condition = 'used' | 'new' | ''
 
 export default function HomeScreen() {
+  const {user, isLoading: isAuthLoading} = useAuth();
+
   const [listings, setListings] = useState<Listing[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [regions, setRegions] = useState<Region[]>([])
@@ -28,7 +31,7 @@ export default function HomeScreen() {
   const [priceSort, setPriceSort] = useState<PriceSort>('newest')
   const [condition, setCondition] = useState<Condition>('')
   const [isLoading, setIsLoading] = useState(true)
-  const { likedListingIds, isLoading: areFavoritesLoading, toggleFavorite } = useFavorites()
+  const { likedListingIds, isLoading: areFavoritesLoading, toggleFavorite } = useFavoritesData()
 
   useEffect(() => {
     let isActive = true
@@ -179,7 +182,7 @@ export default function HomeScreen() {
                 listing={listing}
                 category={categories.find((category) => category.id === listing.category)?.name}
                 isLiked={likedListingIds.includes(listing.id)}
-                onLikePress={(nextIsLiked) => void toggleFavorite(listing.id, nextIsLiked)}
+                onLikePress={(nextIsLiked) => void toggleFavorite(user?.id, listing.id, nextIsLiked)}
               />
             ))}
             {!listings.length && <p className="empty-message">No listings found.</p>}
