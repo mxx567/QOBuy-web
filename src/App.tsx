@@ -23,6 +23,7 @@ export default function App() {
   const syncAuthState  = useAuthStore((s) => s.syncAuthState)
 
   useEffect(()=>{
+    
     let active = true
     void syncAuthState(active)
     const { data: listener } = supabase.auth.onAuthStateChange(() => void syncAuthState(active))

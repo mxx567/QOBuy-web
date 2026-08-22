@@ -14,17 +14,11 @@ type AuthContextValue = {
   syncAuthState(active : boolean): void;
 }
 
-// const AuthContext = createContext<AuthContextValue>({ 
-//   user: null, 
-//   profile: null, 
-//   isLoading: true, 
-//   isLoggedIn: false 
-// })
 
 export const useAuthStore = create<AuthContextValue>((set,get)=>({
   user: null,
   profile: null,
-  isLoading: false,
+  isLoading: true,
   isLoggedIn: false,
   setUser: (user) => { set({user}) },
   setProfile: (profile) => { set({profile}) },
